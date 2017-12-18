@@ -172,7 +172,7 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 									}									
 								}
 								if(count($featureImg_2) > 0) {
-									if(!empty($featureImg_2)){
+									if(!empty($featureImg_2[0])){
 										?>
 										<div class="product-thumbnail">
 											<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>');"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
@@ -181,7 +181,7 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 									}									
 								}
 								if(count($featureImg_3) > 0) {
-									if(!empty($featureImg_3)){
+									if(!empty($featureImg_3[0])){
 										?>
 										<div class="product-thumbnail">
 											<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>');"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
