@@ -156,40 +156,40 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 							<div>
 								<center>
 									<?php 
-								$thumbnail_1=get_post_meta($id,"thumbnail_1",true);
-								$thumbnail_2=get_post_meta($id,"thumbnail_2",true);
-								$thumbnail_3=get_post_meta($id,"thumbnail_3",true);								
-								$featureImg_1=wp_get_attachment_image_src($thumbnail_1,"single-post-thumbnail");			
-								$featureImg_2=wp_get_attachment_image_src($thumbnail_2,"single-post-thumbnail");			
-								$featureImg_3=wp_get_attachment_image_src($thumbnail_3,"single-post-thumbnail");										
-								if(count($featureImg_1) > 0) {
-									if(!empty($featureImg_1[0])){
-										?>
-										<div class="product-thumbnail">
-											<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>');"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
-										</div>
-										<?php	
-									}									
-								}
-								if(count($featureImg_2) > 0) {
-									if(!empty($featureImg_2[0])){
-										?>
-										<div class="product-thumbnail">
-											<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>');"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
-										</div>
-										<?php
-									}									
-								}
-								if(count($featureImg_3) > 0) {
-									if(!empty($featureImg_3[0])){
-										?>
-										<div class="product-thumbnail">
-											<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>');"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
-										</div>
-										<?php
-									}									
-								}
-								?>					
+									$thumbnail_1=get_post_meta($id,"thumbnail_1",true);
+									$thumbnail_2=get_post_meta($id,"thumbnail_2",true);
+									$thumbnail_3=get_post_meta($id,"thumbnail_3",true);								
+									$featureImg_1=wp_get_attachment_image_src($thumbnail_1,"single-post-thumbnail");			
+									$featureImg_2=wp_get_attachment_image_src($thumbnail_2,"single-post-thumbnail");			
+									$featureImg_3=wp_get_attachment_image_src($thumbnail_3,"single-post-thumbnail");										
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>');"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>');"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>');"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									?>					
 								</center>																
 							</div>
 							<div class="purchase-product">
