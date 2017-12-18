@@ -1902,7 +1902,12 @@ h1.title-detail-product {
 	font-size: 14px !important;
 	margin-top: 20px;
 }
-
+div.product-thumbnail{
+	    display: inline-block;
+    width: 20%;
+    border: 1px solid #dddddd;
+    padding: 2px;
+}
 /*@media (max-width: 620px) {*/
 @media (max-width: 1200px) {
 	.wrap {

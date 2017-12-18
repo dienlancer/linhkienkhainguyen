@@ -67,37 +67,50 @@
 			</div>
 
 			<div class="col-lg-11 col-md-11 col-xs-15 col-sm-15">
-				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-					<!-- Indicators -->
-				<?php  
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">					
+					<?php  
 					$hinhanh = get_option('__images_banner_large', array());
-
 					$urls = get_option('__images_banner_url', array());
 					$n_count = count($hinhanh);
-				?>
-					<ol class="carousel-indicators">
-					<?php foreach ($hinhanh as $key => $value) {
-						if ($key == 0) {
-							echo '<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>';
-						} else {
-							echo '<li data-target="#carousel-example-generic" data-slide-to="' . $key . '"></li>';
-						} }
-					?>
-					</ol>
-
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-					<?php foreach ($hinhanh as $key => $value) {
-						if ($key == 0) { ?>
-							<div class="item active">
-								<a href="<?php echo esc_url($urls[$key]) ?>"><img src="<?php echo esc_url($value) ?>" alt=""></a>
-							</div>
-					<?php } else { ?>
-							<div class="item">
-								<a href="<?php echo esc_url($urls[$key]) ?>"><img src="<?php echo esc_url($value) ?>" alt=""></a>
-							</div>
-					<?php } } ?>						
-					</div>
+					if (is_array($values) || is_object($values)){
+						?>
+						<ol class="carousel-indicators">
+							<?php 						
+							foreach ($hinhanh as $key => $value) {
+								if ($key == 0) {
+									echo '<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>';
+								} else {
+									echo '<li data-target="#carousel-example-generic" data-slide-to="' . $key . '"></li>';
+								} 
+							}
+							?>
+						</ol>		
+						<?php
+					}
+					if (is_array($values) || is_object($values)){
+						?>
+						<div class="carousel-inner" role="listbox">
+							<?php 
+							foreach ($hinhanh as $key => $value) {
+								if ($key == 0) { 
+									?>
+									<div class="item active">
+										<a href="<?php echo esc_url($urls[$key]) ?>"><img src="<?php echo esc_url($value) ?>" alt=""></a>
+									</div>
+									<?php 
+								} else { 
+									?>
+									<div class="item">
+										<a href="<?php echo esc_url($urls[$key]) ?>"><img src="<?php echo esc_url($value) ?>" alt=""></a>
+									</div>
+									<?php 
+								} 
+							} 
+							?>						
+						</div>
+						<?php
+					}
+					?>												
 				</div>
 			</div>
 

@@ -53,6 +53,11 @@
 	include_once get_template_directory() . "/inc/paging.php" ; 
 	?>
 	<?php echo stripslashes(html_entity_decode(get_option('ket_thuc_head'))); ?>
+	<script type="text/javascript" language="javascript">
+	function changeImage(featuredImg){
+		console.log(featuredImg);
+	}
+</script>
 </head>
 
 <body <?php body_class(); ?>>
