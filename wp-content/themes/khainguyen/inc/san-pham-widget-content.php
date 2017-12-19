@@ -156,12 +156,23 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 							<div>
 								<center>
 									<?php 
+
 									$thumbnail_1=get_post_meta($id,"thumbnail_1",true);
 									$thumbnail_2=get_post_meta($id,"thumbnail_2",true);
-									$thumbnail_3=get_post_meta($id,"thumbnail_3",true);								
+									$thumbnail_3=get_post_meta($id,"thumbnail_3",true);
+									$thumbnail_4=get_post_meta($id,"thumbnail_4",true);
+									$thumbnail_5=get_post_meta($id,"thumbnail_5",true);
+									$thumbnail_6=get_post_meta($id,"thumbnail_6",true);
+									$thumbnail_7=get_post_meta($id,"thumbnail_7",true);
+
 									$featureImg_1=wp_get_attachment_image_src($thumbnail_1,"single-post-thumbnail");			
 									$featureImg_2=wp_get_attachment_image_src($thumbnail_2,"single-post-thumbnail");			
-									$featureImg_3=wp_get_attachment_image_src($thumbnail_3,"single-post-thumbnail");										
+									$featureImg_3=wp_get_attachment_image_src($thumbnail_3,"single-post-thumbnail");									
+									$featureImg_4=wp_get_attachment_image_src($thumbnail_4,"single-post-thumbnail");			
+									$featureImg_5=wp_get_attachment_image_src($thumbnail_5,"single-post-thumbnail");			
+									$featureImg_6=wp_get_attachment_image_src($thumbnail_6,"single-post-thumbnail");									
+									$featureImg_7=wp_get_attachment_image_src($thumbnail_7,"single-post-thumbnail");									
+
 									if(count($featureImg_1) > 0) {
 										if(!empty($featureImg_1[0])){
 											?>
@@ -185,6 +196,42 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 											?>
 											<div class="product-thumbnail">
 												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>');"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>');"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>');"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>');"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>');"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
 											</div>
 											<?php
 										}									
