@@ -98,6 +98,43 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 			while ( $sanphams->have_posts() ) {
 				$sanphams->the_post();	
 				$id = get_the_id();		
+				
+				$tinh_trang_hang=get_post_meta($id,"tinh_trang_hang",true);
+				$tinh_trang_text="";
+				switch ($tinh_trang_hang) {
+					case 'con_hang':
+						$tinh_trang_text="Còn hàng";
+						break;
+					case 'hang_ve_lai':
+						$tinh_trang_text="Hàng về lại";
+						break;
+					case 'tam_het':
+						$tinh_trang_text="Tạm hết";
+						break;
+					case 'hang_sap_ve':
+						$tinh_trang_text="Hàng sắp về";
+						break;
+					default :
+								$tinh_trang_text="Còn hàng";
+								break;
+				}
+
+				$thumbnail_1=get_post_meta($id,"thumbnail_1",true);
+				$thumbnail_2=get_post_meta($id,"thumbnail_2",true);
+				$thumbnail_3=get_post_meta($id,"thumbnail_3",true);
+				$thumbnail_4=get_post_meta($id,"thumbnail_4",true);
+				$thumbnail_5=get_post_meta($id,"thumbnail_5",true);
+				$thumbnail_6=get_post_meta($id,"thumbnail_6",true);
+				$thumbnail_7=get_post_meta($id,"thumbnail_7",true);
+
+				$featureImg_1=wp_get_attachment_image_src($thumbnail_1,"single-post-thumbnail");			
+				$featureImg_2=wp_get_attachment_image_src($thumbnail_2,"single-post-thumbnail");			
+				$featureImg_3=wp_get_attachment_image_src($thumbnail_3,"single-post-thumbnail");									
+				$featureImg_4=wp_get_attachment_image_src($thumbnail_4,"single-post-thumbnail");			
+				$featureImg_5=wp_get_attachment_image_src($thumbnail_5,"single-post-thumbnail");			
+				$featureImg_6=wp_get_attachment_image_src($thumbnail_6,"single-post-thumbnail");									
+				$featureImg_7=wp_get_attachment_image_src($thumbnail_7,"single-post-thumbnail");		
+				$featureImgMain=get_the_post_thumbnail_url($id, 'full');				
 		?>
 		<?php 
 			if ($i == 1 || $i == 3) { ?>
@@ -105,10 +142,87 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 						<div class="product">
 							<a href="<?php the_permalink() ?>" class="a-product">
 								<img class="" src="<?php echo get_the_post_thumbnail_url(get_the_id(), 'full') ?>" />
-								<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
+								
+							</a>
+							<div>
+								<center>
+									<?php 
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>',this);"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>',this);"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>',this);"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>',this);"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>',this);"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>',this);"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>',this);"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(!empty($featureImgMain)){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImgMain; ?>',this);"><img src="<?php echo $featureImgMain; ?>" /></a></center>
+											</div>
+											<?php
+										}	
+									?>					
+								</center>																
+							</div>
+							<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
 									<?php echo SubTitle(get_the_title())?>
 								</div>
-							</a>
 							<div class="id-product">
 								Mã SP: <?php echo get_post_meta($id, "ma_sp", true) ?>
 							</div>
@@ -153,96 +267,9 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
 							</div>
-							<div>
-								<center>
-									<?php 
-
-									$thumbnail_1=get_post_meta($id,"thumbnail_1",true);
-									$thumbnail_2=get_post_meta($id,"thumbnail_2",true);
-									$thumbnail_3=get_post_meta($id,"thumbnail_3",true);
-									$thumbnail_4=get_post_meta($id,"thumbnail_4",true);
-									$thumbnail_5=get_post_meta($id,"thumbnail_5",true);
-									$thumbnail_6=get_post_meta($id,"thumbnail_6",true);
-									$thumbnail_7=get_post_meta($id,"thumbnail_7",true);
-
-									$featureImg_1=wp_get_attachment_image_src($thumbnail_1,"single-post-thumbnail");			
-									$featureImg_2=wp_get_attachment_image_src($thumbnail_2,"single-post-thumbnail");			
-									$featureImg_3=wp_get_attachment_image_src($thumbnail_3,"single-post-thumbnail");									
-									$featureImg_4=wp_get_attachment_image_src($thumbnail_4,"single-post-thumbnail");			
-									$featureImg_5=wp_get_attachment_image_src($thumbnail_5,"single-post-thumbnail");			
-									$featureImg_6=wp_get_attachment_image_src($thumbnail_6,"single-post-thumbnail");									
-									$featureImg_7=wp_get_attachment_image_src($thumbnail_7,"single-post-thumbnail");									
-
-									if(count($featureImg_1) > 0) {
-										if(!empty($featureImg_1[0])){
-											?>
-											<div class="product-thumbnail">
-												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>');"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
-											</div>
-											<?php	
-										}									
-									}
-									if(count($featureImg_2) > 0) {
-										if(!empty($featureImg_2[0])){
-											?>
-											<div class="product-thumbnail">
-												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>');"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
-											</div>
-											<?php
-										}									
-									}
-									if(count($featureImg_3) > 0) {
-										if(!empty($featureImg_3[0])){
-											?>
-											<div class="product-thumbnail">
-												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>');"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
-											</div>
-											<?php
-										}									
-									}
-									if(count($featureImg_4) > 0) {
-										if(!empty($featureImg_4[0])){
-											?>
-											<div class="product-thumbnail">
-												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>');"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
-											</div>
-											<?php	
-										}									
-									}
-									if(count($featureImg_5) > 0) {
-										if(!empty($featureImg_5[0])){
-											?>
-											<div class="product-thumbnail">
-												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>');"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
-											</div>
-											<?php
-										}									
-									}
-									if(count($featureImg_6) > 0) {
-										if(!empty($featureImg_6[0])){
-											?>
-											<div class="product-thumbnail">
-												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>');"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
-											</div>
-											<?php
-										}									
-									}
-									if(count($featureImg_7) > 0) {
-										if(!empty($featureImg_7[0])){
-											?>
-											<div class="product-thumbnail">
-												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>');"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
-											</div>
-											<?php
-										}									
-									}
-									?>					
-								</center>																
-							</div>
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -251,10 +278,90 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 						<div class="product">
 							<a href="<?php the_permalink() ?>" class="a-product">
 								<img class="" src="<?php echo get_the_post_thumbnail_url(get_the_id(), 'full') ?>" />
-								<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
+								
+							</a>
+							<div>
+								<center>
+									<?php 
+
+																
+
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>',this);"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>',this);"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>',this);"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>',this);"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>',this);"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>',this);"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>',this);"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(!empty($featureImgMain)){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImgMain; ?>',this);"><img src="<?php echo $featureImgMain; ?>" /></a></center>
+											</div>
+											<?php
+										}	
+									?>					
+								</center>																
+							</div>
+							<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
 									<?php echo SubTitle(get_the_title()) ?>
 								</div>
-							</a>
 							<div class="id-product">
 								Mã SP: <?php echo get_post_meta($id, "ma_sp", true) ?>
 							</div>
@@ -299,10 +406,9 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
 							</div>
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -315,10 +421,88 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 						<div class="product">
 							<a href="<?php the_permalink() ?>" class="a-product">
 								<img class="" src="<?php echo get_the_post_thumbnail_url(get_the_id(), 'full') ?>" />
-								<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
+								
+							</a>
+							<div>
+								<center>
+									<?php 															
+
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>',this);"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>',this);"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>',this);"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>',this);"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>',this);"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>',this);"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>',this);"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(!empty($featureImgMain)){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImgMain; ?>',this);"><img src="<?php echo $featureImgMain; ?>" /></a></center>
+											</div>
+											<?php
+										}	
+									?>					
+								</center>																
+							</div>
+							<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
 									<?php echo SubTitle(get_the_title()) ?>
 								</div>
-							</a>
 							<div class="id-product">
 								Mã SP: <?php echo get_post_meta($id, "ma_sp", true) ?>
 							</div>
@@ -363,10 +547,9 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
 							</div>
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -377,10 +560,89 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 						<div class="product">
 							<a href="<?php the_permalink() ?>" class="a-product">
 								<img class="" src="<?php echo get_the_post_thumbnail_url(get_the_id(), 'full') ?>" />
-								<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
+								
+							</a>
+							<div>
+								<center>
+									<?php 
+																
+
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>',this);"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>',this);"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>',this);"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>',this);"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>',this);"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>',this);"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>',this);"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(!empty($featureImgMain)){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImgMain; ?>',this);"><img src="<?php echo $featureImgMain; ?>" /></a></center>
+											</div>
+											<?php
+										}	
+									?>					
+								</center>																
+							</div>
+							<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
 									<?php echo SubTitle(get_the_title()) ?>
 								</div>
-							</a>
 							<div class="id-product">
 								Mã SP: <?php echo get_post_meta($id, "ma_sp", true) ?>
 							</div>
@@ -425,10 +687,9 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
 							</div>
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -437,10 +698,90 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 						<div class="product ">
 							<a href="<?php the_permalink() ?>" class="a-product">
 								<img class="" src="<?php echo get_the_post_thumbnail_url(get_the_id(), 'full') ?>" />
-								<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
+								
+							</a>
+							<div>
+								<center>
+									<?php 
+
+															
+
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>',this);"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>',this);"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>',this);"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>',this);"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>',this);"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>',this);"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>',this);"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(!empty($featureImgMain)){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImgMain; ?>',this);"><img src="<?php echo $featureImgMain; ?>" /></a></center>
+											</div>
+											<?php
+										}	
+									?>					
+								</center>																
+							</div>
+							<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
 									<?php echo SubTitle(get_the_title()) ?>
 								</div>
-							</a>
 							<div class="id-product">
 								Mã SP: <?php echo get_post_meta($id, "ma_sp", true) ?>
 							</div>
@@ -485,10 +826,9 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
 							</div>
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -543,6 +883,43 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 			while ( $sanphams->have_posts() ) {
 				$sanphams->the_post();	
 				$id = get_the_id(); 
+
+				$tinh_trang_hang=get_post_meta($id,"tinh_trang_hang",true);
+				$tinh_trang_text="";
+				switch ($tinh_trang_hang) {
+					case 'con_hang':
+						$tinh_trang_text="Còn hàng";
+						break;
+					case 'hang_ve_lai':
+						$tinh_trang_text="Hàng về lại";
+						break;
+					case 'tam_het':
+						$tinh_trang_text="Tạm hết";
+						break;
+					case 'hang_sap_ve':
+						$tinh_trang_text="Hàng sắp về";
+						break;
+					default :
+								$tinh_trang_text="Còn hàng";
+								break;
+				}
+				
+				$thumbnail_1=get_post_meta($id,"thumbnail_1",true);
+				$thumbnail_2=get_post_meta($id,"thumbnail_2",true);
+				$thumbnail_3=get_post_meta($id,"thumbnail_3",true);
+				$thumbnail_4=get_post_meta($id,"thumbnail_4",true);
+				$thumbnail_5=get_post_meta($id,"thumbnail_5",true);
+				$thumbnail_6=get_post_meta($id,"thumbnail_6",true);
+				$thumbnail_7=get_post_meta($id,"thumbnail_7",true);
+
+				$featureImg_1=wp_get_attachment_image_src($thumbnail_1,"single-post-thumbnail");			
+				$featureImg_2=wp_get_attachment_image_src($thumbnail_2,"single-post-thumbnail");			
+				$featureImg_3=wp_get_attachment_image_src($thumbnail_3,"single-post-thumbnail");									
+				$featureImg_4=wp_get_attachment_image_src($thumbnail_4,"single-post-thumbnail");			
+				$featureImg_5=wp_get_attachment_image_src($thumbnail_5,"single-post-thumbnail");			
+				$featureImg_6=wp_get_attachment_image_src($thumbnail_6,"single-post-thumbnail");									
+				$featureImg_7=wp_get_attachment_image_src($thumbnail_7,"single-post-thumbnail");
+				$featureImgMain=get_the_post_thumbnail_url($id, 'full');		
 			?>
 
 				<?php if ($i == 1) { ?>
@@ -550,10 +927,89 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 						<div class="product">
 							<a href="<?php the_permalink() ?>" class="a-product">
 								<img class="" src="<?php echo get_the_post_thumbnail_url(get_the_id(), 'full') ?>" />
-								<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
+								
+							</a>
+							<div>
+								<center>
+									<?php 
+								
+
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>',this);"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>',this);"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>',this);"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>',this);"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>',this);"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>',this);"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>',this);"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(!empty($featureImgMain)){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImgMain; ?>',this);"><img src="<?php echo $featureImgMain; ?>" /></a></center>
+											</div>
+											<?php
+										}	
+									?>					
+								</center>																
+							</div>
+							<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
 									<?php echo SubTitle(get_the_title()) ?>
 								</div>
-							</a>
 							<div class="id-product">
 								Mã SP: <?php echo get_post_meta($id, "ma_sp", true) ?>
 							</div>
@@ -598,10 +1054,9 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
 							</div>
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -610,10 +1065,89 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 						<div class="product">
 							<a href="<?php the_permalink() ?>" class="a-product">
 								<img class="" src="<?php echo get_the_post_thumbnail_url(get_the_id(), 'full') ?>" />
-								<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
+								
+							</a>
+							<div>
+								<center>
+									<?php 
+					
+
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>',this);"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>',this);"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>',this);"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>',this);"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>',this);"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>',this);"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>',this);"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(!empty($featureImgMain)){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImgMain; ?>',this);"><img src="<?php echo $featureImgMain; ?>" /></a></center>
+											</div>
+											<?php
+										}	
+									?>					
+								</center>																
+							</div>
+							<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
 									<?php echo SubTitle(get_the_title()) ?>
 								</div>
-							</a>
 							<div class="id-product">
 								Mã SP: <?php echo get_post_meta($id, "ma_sp", true) ?>
 							</div>
@@ -657,11 +1191,9 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 								<?php //} else { ?>
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
-							</div>
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							</div>							
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -672,10 +1204,89 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 						<div class="product">
 							<a href="<?php the_permalink() ?>" class="a-product">
 								<img class="" src="<?php echo get_the_post_thumbnail_url(get_the_id(), 'full') ?>" />
-								<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
+								
+							</a>
+							<div>
+								<center>
+									<?php 
+					
+
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>',this);"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>',this);"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>',this);"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>',this);"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>',this);"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>',this);"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>',this);"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(!empty($featureImgMain)){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImgMain; ?>',this);"><img src="<?php echo $featureImgMain; ?>" /></a></center>
+											</div>
+											<?php
+										}	
+									?>					
+								</center>																
+							</div>
+							<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
 									<?php echo SubTitle(get_the_title()) ?>
 								</div>
-							</a>
 							<div class="id-product">
 								Mã SP: <?php echo get_post_meta($id, "ma_sp", true) ?>
 							</div>
@@ -720,10 +1331,9 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
 							</div>
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -734,10 +1344,90 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 						<div class="product">
 							<a href="<?php the_permalink() ?>" class="a-product">
 								<img class="" src="<?php echo get_the_post_thumbnail_url(get_the_id(), 'full') ?>" />
-								<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
+								
+							</a>
+							<div>
+								<center>
+									<?php 
+
+													
+
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>',this);"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>',this);"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>',this);"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>',this);"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>',this);"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>',this);"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>',this);"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(!empty($featureImgMain)){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImgMain; ?>',this);"><img src="<?php echo $featureImgMain; ?>" /></a></center>
+											</div>
+											<?php
+										}	
+									?>					
+								</center>																
+							</div>
+							<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
 									<?php echo SubTitle(get_the_title()) ?>
 								</div>
-							</a>
 							<div class="id-product">
 								Mã SP: <?php echo get_post_meta($id, "ma_sp", true) ?>
 							</div>
@@ -782,10 +1472,9 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
 							</div>
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -795,10 +1484,89 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 						<div class="product">
 							<a href="<?php the_permalink() ?>" class="a-product">
 								<img class="" src="<?php echo get_the_post_thumbnail_url(get_the_id(), 'full') ?>" />
-								<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
+								
+							</a>
+							<div>
+								<center>
+									<?php 									
+					
+
+									if(count($featureImg_1) > 0) {
+										if(!empty($featureImg_1[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_1[0]; ?>',this);"><img src="<?php echo $featureImg_1[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_2) > 0) {
+										if(!empty($featureImg_2[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_2[0]; ?>',this);"><img src="<?php echo $featureImg_2[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_3) > 0) {
+										if(!empty($featureImg_3[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_3[0]; ?>',this);"><img src="<?php echo $featureImg_3[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_4) > 0) {
+										if(!empty($featureImg_4[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_4[0]; ?>',this);"><img src="<?php echo $featureImg_4[0]; ?>" /></a></center>
+											</div>
+											<?php	
+										}									
+									}
+									if(count($featureImg_5) > 0) {
+										if(!empty($featureImg_5[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_5[0]; ?>',this);"><img src="<?php echo $featureImg_5[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_6) > 0) {
+										if(!empty($featureImg_6[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_6[0]; ?>',this);"><img src="<?php echo $featureImg_6[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(count($featureImg_7) > 0) {
+										if(!empty($featureImg_7[0])){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImg_7[0]; ?>',this);"><img src="<?php echo $featureImg_7[0]; ?>" /></a></center>
+											</div>
+											<?php
+										}									
+									}
+									if(!empty($featureImgMain)){
+											?>
+											<div class="product-thumbnail">
+												<center><a href="javascript:void(0);" onclick="changeImage('<?php echo $featureImgMain; ?>',this);"><img src="<?php echo $featureImgMain; ?>" /></a></center>
+											</div>
+											<?php
+										}	
+									?>					
+								</center>																
+							</div>
+							<div class="title-product" data-toggle="tooltip" data-placement="top" title="<?php the_title() ?>">
 									<?php echo SubTitle(get_the_title()) ?>
 								</div>
-							</a>
 							<div class="id-product">
 								Mã SP: <?php echo get_post_meta($id, "ma_sp", true) ?>
 							</div>
@@ -843,10 +1611,9 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
 							</div>
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -858,10 +1625,8 @@ include_once get_template_directory() . "/inc/cost_product.php" ;
 					<?php $i++; } wp_reset_postdata(); ?>
 							</div>
 						</div>
-					</div>
-					
+					</div>					
 				</div>
-
 			</div>
 		</div>
 	</div>

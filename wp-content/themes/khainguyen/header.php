@@ -54,10 +54,31 @@
 	?>
 	<?php echo stripslashes(html_entity_decode(get_option('ket_thuc_head'))); ?>
 	<script type="text/javascript" language="javascript">
-	function changeImage(featuredImg){
-		console.log(featuredImg);
-	}
-</script>
+		function changeImage(featuredImg,ctrl){
+			var product_ctrl=jQuery(ctrl).closest("div.product");
+			var img_ctrl=jQuery(product_ctrl).find("a.a-product > img");
+			jQuery(img_ctrl).prop("src",featuredImg);		
+		}
+		function changeImageBoxProduct(featuredImg,ctrl){
+			var product_ctrl=jQuery(ctrl).closest("div.box-product");
+			var img_ctrl=jQuery(product_ctrl).find("a.a-product > img");
+			jQuery(img_ctrl).prop("src",featuredImg);		
+		}
+		function changeThumbnail(featuredImg){
+			var img_ctrl=jQuery("img.img-detail-product");
+			var a_fancybox_ctrl=jQuery("a.fancybox-a-thumbnail");
+			jQuery(img_ctrl).prop("src",featuredImg);		
+			jQuery(a_fancybox_ctrl).prop("href",featuredImg);
+		}
+	</script>
+	<!-- begin fancybox -->
+	<script language="javascript" type="text/javascript" src="<?php echo get_template_directory_uri() . "/js/jquery.fancybox.min.js" ; ?>"                 ></script>
+	<link href="<?php echo get_template_directory_uri()."/css/jquery.fancybox.min.css"; ?>" rel="stylesheet" type="text/css" />
+	<!-- end fancybox -->
+	<!-- begin owl_carousel -->
+	<script src="<?php echo get_template_directory_uri() . "/owl-carousel/owl.carousel.js" ; ?>"></script>
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri()."/owl-carousel/assets/owl.carousel.css"; ?>" />  
+	<!-- end owl_carousel -->
 </head>
 
 <body <?php body_class(); ?>>
@@ -86,9 +107,11 @@ print '<div class="dc">
 			<div class="col-lg-12 col-md-15 col-sm-15 hidden-xs hidden-sm">
 				<div class="top-info hidden-md">
 					<div class="list-logo firts-list-logo">					
-						<a href="mailto:#">
-							<img class="img-logo" src="<?php echo esc_url(get_template_directory_uri() . '/images/email-header.png') ?>" /><span class=""><?php echo get_option('email') ?></span>
-						</a>
+						<?php if(is_active_sidebar('ho-tro')):?>
+        <?php dynamic_sidebar('ho-tro')?>
+    <?php endif; ?>
+							
+						
 					</div>
 
 					<div class="list-logo">

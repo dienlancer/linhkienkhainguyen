@@ -72,7 +72,7 @@
 					$hinhanh = get_option('__images_banner_large', array());
 					$urls = get_option('__images_banner_url', array());
 					$n_count = count($hinhanh);
-					if (is_array($values) || is_object($values)){
+					if (is_array($hinhanh) || is_object($hinhanh)){
 						?>
 						<ol class="carousel-indicators">
 							<?php 						
@@ -87,7 +87,7 @@
 						</ol>		
 						<?php
 					}
-					if (is_array($values) || is_object($values)){
+					if (is_array($hinhanh) || is_object($hinhanh)){
 						?>
 						<div class="carousel-inner" role="listbox">
 							<?php 

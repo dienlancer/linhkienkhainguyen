@@ -1717,9 +1717,10 @@ h1.title-detail-product {
 	height: 60px;
 	background-color: #ebebeb;
 	border: 1px solid #d8d8d8;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: 0px;
+	padding-right: 0px;
 	line-height: 60px;
+	text-align: center;
 }
 
 .price {
@@ -1904,9 +1905,77 @@ h1.title-detail-product {
 }
 div.product-thumbnail{
 	    display: inline-block;
-    width: 20%;
+    width:11%;
     border: 1px solid #dddddd;
     padding: 2px;
+    margin-top: 5px;
+}
+div.product-detail-thumbnail{	
+	display: inline-block;
+	width: 11%;
+    border: 1px solid #dddddd;
+    padding: 2px;
+    margin-top: 5px;
+}
+div.product-detail-thumbnail-terran{
+	border: 1px solid #dddddd;
+    padding: 2px;
+    margin-top: 5px;
+}
+span.midu{
+	color: #fc031a;
+}
+div.titan{
+	padding: 0px 5px;
+}
+div.hang-hoa-status{
+	margin-top: 15px;
+	text-align: center;	
+	font-size: 12px;
+}
+div.firts-list-logo div.custom-html-widget{
+        font-size: 16px;
+        font-weight: bold;
+}
+div.product-detail-status{
+	margin-top: 15px;
+    font-size: 18px;
+}
+div.related-featured div.owl-prev,div.related-featured div.owl-next{
+           background:#08c6d5;
+    color: #ffffff;
+    padding: 5px 11px;
+    
+}
+div.related-featured div.owl-prev{
+      position: absolute;
+    right: 35px;
+    top: -42px;
+
+}
+div.related-featured div.owl-next{
+        position: absolute;
+    right: 0;
+    top: -42px;
+}
+div.box-product{
+	border-right: 1px solid #e1e1e1;
+	    padding: 0px 5px 0px 5px;
+}
+div.product-thumbnail-ds div.owl-prev,div.product-thumbnail-ds div.owl-next{
+        background: transparent;
+    color: #333;
+    padding: 5px 11px;
+}
+div.product-thumbnail-ds div.owl-prev{
+        position: absolute;
+    left: -31px;
+    top: 16px;
+}
+div.product-thumbnail-ds div.owl-next{
+   position: absolute;
+    right: -32px;
+    top: 15px;
 }
 /*@media (max-width: 620px) {*/
 @media (max-width: 1200px) {

@@ -423,3 +423,16 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+add_action('widgets_init', 'zendvn_theme_widgets_init');
+function zendvn_theme_widgets_init(){	
+	$themeName="dienkimtheme";	
+	register_sidebar(array(
+		'name'          => __( 'Hỗ trợ', $themeName ),
+		'id'            => 'ho-tro',		
+		'class'         => '',
+		'before_widget' => '',
+		'before_title'  => '',
+		'after_title'   => '',
+		'after_widget'  => ''				
+	));
+}

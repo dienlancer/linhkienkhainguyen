@@ -1,77 +1,6 @@
-<?php get_header(); ?>
-<div class="container-fluid group-danhmuc-slider">
-	<div class="wrap">
-		<div class="row">
-			<div class="col-lg-4 col-md-4 hidden-xs hidden-sm">
-				<div class="group-danhmuc">
-					<div class="title-danhmuc">
-						<span><i class="fa fa-align-justify" aria-hidden="true"></i></span>
-						<span>TẤT CẢ DANH MỤC</span>
-					</div>
-					<?php 
-					wp_nav_menu(array(
-						'menu' => "Danh mục",
-						'container' => '',
-						'menu_class' => "body-danhmuc"
-					)); 
-					?>
-					
-				</div>
-			</div>
+<?php get_header(); 
+?>
 
-			<div class="col-lg-11 col-md-11">
-				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-					<!-- Indicators -->
-					<?php  
-					$hinhanh = get_option('__images_banner_large', array());
-
-					$urls = get_option('__images_banner_url', array());
-					$n_count = count($hinhanh);
-				?>
-					<ol class="carousel-indicators">
-					<?php foreach ($hinhanh as $key => $value) {
-						if ($key == 0) {
-							echo '<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>';
-						} else {
-							echo '<li data-target="#carousel-example-generic" data-slide-to="' . $key . '"></li>';
-						} }
-					?>
-					</ol>
-
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-					<?php foreach ($hinhanh as $key => $value) {
-						if ($key == 0) { ?>
-							<div class="item active">
-								<a href="<?php echo esc_url($urls[$key]) ?>"><img src="<?php echo esc_url($value) ?>" alt=""></a>
-							</div>
-					<?php } else { ?>
-							<div class="item">
-								<a href="<?php echo esc_url($urls[$key]) ?>"><img src="<?php echo esc_url($value) ?>" alt=""></a>
-							</div>
-					<?php } } ?>						
-					</div>
-				</div>
-			</div>
-
-			<div class="hidden-lg hidden-md col-xs-15 col-sm-15 group-danhmuc-mobile">
-				<div class="title-danhmuc-mobile">
-					<span class="left">TẤT CẢ DANH MỤC</span>
-					<span class="right">&minus;</span>
-				</div>
-				<?php 
-					wp_nav_menu(array(
-						'menu' => "Danh mục",
-						'container' => '',
-						'menu_class' => "body-danhmuc-mobile"
-					)); 
-				?>
-				
-			</div>
-
-		</div>
-	</div>
-</div>
 <script type="text/javascript">
 	jQuery(".title-danhmuc-mobile").click(function(){
 		// console.log("D");
@@ -130,6 +59,25 @@
 				if (have_posts() ) :
 				$i = 1;
 				while (have_posts()) : the_post();
+					$tinh_trang_hang=get_post_meta(get_the_id(),"tinh_trang_hang",true);
+				$tinh_trang_text="";
+				switch ($tinh_trang_hang) {
+					case 'con_hang':
+						$tinh_trang_text="Còn hàng";
+						break;
+					case 'hang_ve_lai':
+						$tinh_trang_text="Hàng về lại";
+						break;
+					case 'tam_het':
+						$tinh_trang_text="Tạm hết";
+						break;
+					case 'hang_sap_ve':
+						$tinh_trang_text="Hàng sắp về";
+						break;
+					default :
+								$tinh_trang_text="Còn hàng";
+								break;
+				}				
 			?>
 							
 					<div class="col-lg-4 col-xs-7 col-sp br-product <?php echo (($i % 2) == 0 ? 'xs-remove-line' : ''); ?>">
@@ -189,11 +137,8 @@
 								<!-- Giá sỉ: <span class="price-vnd"><?php //show_cost(get_post_meta($id, "gia_si_khuyen_mai", true) * 0.7) ?></span> -->
 								<?php //} ?>
 							</div>
-
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
@@ -371,9 +316,28 @@
 
 				$sps = new WP_Query( $ar );
 				if ($sps->have_posts() ) :
-				$i = 1;
+				$i = 1;				
 				while ( $sps->have_posts() ) :
 					$sps->the_post();
+					$tinh_trang_hang=get_post_meta(get_the_id(),"tinh_trang_hang",true);
+					$tinh_trang_text="";
+					switch ($tinh_trang_hang) {
+						case 'con_hang':
+						$tinh_trang_text="Còn hàng";
+						break;
+						case 'hang_ve_lai':
+						$tinh_trang_text="Hàng về lại";
+						break;
+						case 'tam_het':
+						$tinh_trang_text="Tạm hết";
+						break;
+						case 'hang_sap_ve':
+						$tinh_trang_text="Hàng sắp về";
+						break;
+						default :
+								$tinh_trang_text="Còn hàng";
+								break;
+					}
 			?>
 							
 					<div class="col-lg-4 col-xs-7 col-sp br-product <?php echo (($i % 2) == 0 ? 'xs-remove-line' : ''); ?>">
@@ -429,10 +393,8 @@
 								<?php //} ?>
 							</div>
 							
-							<div class="purchase-product">
-								<i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
-								<span class="slash-purchase">&nbsp;</span>
-								<a class="btn btn-default" href="#" role="button">ORDER</a>
+							<div class="hang-hoa-status">
+								Tình trạng : <span class="midu"><b><?php echo $tinh_trang_text; ?></b></span>
 							</div>
 						</div>
 					</div>
